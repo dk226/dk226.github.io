@@ -87,11 +87,34 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>实验目的是熟悉个人博客系统的搭建。<br>具体参考方案包括：注册Github账号，搭建Hexo环境并实现个人博客搭建，撰写实验报告。</p>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>联网计算机，Windows11操作系统</p>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="安装git，nodejs"><a href="#安装git，nodejs" class="headerlink" title="安装git，nodejs"></a>安装git，nodejs</h3><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/download">nodejs下载</a><br><a target="_blank" rel="noopener" href="https://gitforwindows.org/">git下载</a><br>安装完成后，使用下述指令确定安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>安装Hexo，并初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ hexo -v</span><br><span class="line">$ hexo init dongkai</span><br></pre></td></tr></table></figure>
 
+<h3 id="搭建github个人仓库，并生成ssh密钥，将其添加到GitHub里面"><a href="#搭建github个人仓库，并生成ssh密钥，将其添加到GitHub里面" class="headerlink" title="搭建github个人仓库，并生成ssh密钥，将其添加到GitHub里面"></a>搭建github个人仓库，并生成ssh密钥，将其添加到GitHub里面</h3><p>在git bash里面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;youremail&quot;</span></span><br><span class="line">$ ssh-keygen -t rsa -C <span class="string">&quot;youremail&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这样就生成了ssh文件夹，把里面的id_rsa.pub放到GitHub上。</p>
+<p>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>检验是否成功。</p>
+<h3 id="将hexo部署到github上"><a href="#将hexo部署到github上" class="headerlink" title="将hexo部署到github上"></a>将hexo部署到github上</h3><p>打开myblog里面的配置文件_config.yml,在文件末尾，修改添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ deploy:</span><br><span class="line">$   <span class="built_in">type</span>: git</span><br><span class="line">$   repo: https://github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">$   branch: master</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>其中$hexo clean$清除之前生成的东西.<br>$hexo generate$ 顾名思义，生成静态文章，可以用 $hexo g$缩写<br>$hexo deploy$ 部署文章，可以用$hexo d$缩写</p>
+<h3 id="访问个人博客"><a href="#访问个人博客" class="headerlink" title="访问个人博客"></a>访问个人博客</h3><p>通过<a target="_blank" rel="noopener" href="https://dk226.github.io/">链接</a>访问新创建的博客。</p>
+<h3 id="更新博客"><a href="#更新博客" class="headerlink" title="更新博客"></a>更新博客</h3><p>我们可以创建新的博客页面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new newpapername</span><br></pre></td></tr></table></figure>
+<p>在source/_post文件夹里面修改对应的markdown文件，然后更新上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+
+<h1 id="END"><a href="#END" class="headerlink" title="END"></a>END</h1><h3 id="学号202000130051"><a href="#学号202000130051" class="headerlink" title="学号202000130051"></a>学号202000130051</h3><h3 id="姓名：董凯"><a href="#姓名：董凯" class="headerlink" title="姓名：董凯"></a>姓名：董凯</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/14/lab/" data-id="clfi71cnq0000v8umgb3s64ma" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2023/03/14/lab/" data-id="clfi7kv2x0000uoumaetoamek" class="article-share-link">Share</a>
       
       
     </footer>
